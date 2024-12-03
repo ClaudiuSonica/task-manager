@@ -18,6 +18,8 @@ build/
 
 # Environment files
 .env
+.env.*
+/server/.env
 .env.local
 .env.development
 .env.production
