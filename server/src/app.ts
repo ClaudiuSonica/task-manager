@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes';
+import boardRoutes from "./routes/boardRoutes";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ mongoose
 
 
 app.use('/api/auth', authRoutes);
+app.use('/api/boards', boardRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
