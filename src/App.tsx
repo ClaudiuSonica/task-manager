@@ -1,10 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; // Ensure this is imported
 import Login from './pages/Login';
 import Register from './pages/Register';
-import ProtectedRoute from "./components/ProtectedRoute";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from './pages/Dashboard';
+import ProtectedRoute from './components/ProtectedRoute';
+import NotFound from './pages/NotFound';
 
-function App() {
+const App = () => {
     return (
         <Router>
             <Routes>
@@ -18,10 +21,23 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
-                <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
+
+            {/* ToastContainer must be added here */}
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </Router>
     );
-}
+};
 
 export default App;

@@ -1,31 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AxiosError } from 'axios';
-import axios from 'axios';
+import { handleRegister } from '../handlers/authHandlers';
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
-    const handleLogin = async (e: React.FormEvent) => {
+    const onSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/register', { email, password });
-            localStorage.setItem('token', data.token); // Save the token
-            navigate('/dashboard'); // Redirect to dashboard
-        } catch (error) {
-            if (error instanceof AxiosError) {
-                console.error('Register failed:', error.response?.data);
-            } else {
-                console.error('An unexpected error occurred.');
-            }
-        }
+        handleRegister(email, password, navigate);
     };
 
     return (
         <div className="flex items-center justify-center h-screen">
-            <form onSubmit={handleLogin} className="w-1/3 p-4 shadow-md bg-white">
+            <form onSubmit={onSubmit} className="w-1/3 p-4 shadow-md bg-white">
                 <h2 className="text-xl font-bold mb-4">Register</h2>
                 <input
                     type="email"
